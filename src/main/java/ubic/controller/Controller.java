@@ -15,8 +15,8 @@ public class Controller {
         private TaskService service;
         @PostMapping("/task/save")
         public HttpEntity<Long> save (@RequestBody Task object) {
-        Task task = service.save(object);
-                return task!= null ? ResponseEntity.ok(task.getId()) : ResponseEntity.badRequest().build();
+                Long id = service.save(object);
+                return id!= null ? ResponseEntity.ok(id) : ResponseEntity.badRequest().build();
 }
         @GetMapping("/task/getall")
         public List<Task> tasks() { return service.getall(); }
