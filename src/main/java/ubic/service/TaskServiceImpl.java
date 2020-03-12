@@ -10,10 +10,11 @@ import java.util.Optional;
 
 @Service
 public class TaskServiceImpl implements TaskService {
+    //параметр запуска ограничивающий количество незавершенных задач в списке,
+    // если достигнут, то задачу поставить нельзя.
     private int count = 2;
     @Autowired
     private TaskRepository repository;
-
     @Override
     public Long save(Task task) {
         if(isfree())
@@ -22,7 +23,7 @@ public class TaskServiceImpl implements TaskService {
         else return (long) -1;
     }
     @Override
-    public boolean isfree() { return getall().stream().filter(task->!task.isCompleted()).count() < count; }
+    public boolean isfree() { return repository.taskscount()<count; }
     @Override
     public List<Task> getall () { return (List<Task>) repository.findAll(); }
     @Override
@@ -35,4 +36,6 @@ public class TaskServiceImpl implements TaskService {
        return task.getId();}
         else return (long) -1;
     }
+    @Override
+    public List<Task> getNotCompletedTasks() { return repository.getNotCompletedTasks(); }
 }

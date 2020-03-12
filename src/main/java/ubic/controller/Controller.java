@@ -20,6 +20,8 @@ public class Controller {
 }
         @GetMapping("/task/getall")
         public List<Task> tasks() { return service.getall(); }
+        @GetMapping("/task/getnotcompletedtasks")
+        public List<Task> notCompletedTasts() { return service.getNotCompletedTasks(); }
 
         @PutMapping("/mark/{id}/")
         public String updateTask(@PathVariable Long id) {

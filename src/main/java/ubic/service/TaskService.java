@@ -9,4 +9,5 @@ public interface TaskService {
     List<Task> getall ();
     Long completeTask(Long id);
     boolean isfree();
+    List<Task> getNotCompletedTasks();
 }
